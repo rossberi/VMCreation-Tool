@@ -1,15 +1,16 @@
 ﻿$VMName = Read-Host "VM Name:"
-[int]$VMDisk = Read-Host "VM Fetsplattengröße: "
-[int]$VMMem = Read-Host "VM Ram (in GB):"
-[int]$VMCore = Read-Host "VM Kerne:"
-$VMGen = Read-Host "VM Generation: (1 oder 2 (UEFI): "
-$VMSwitch = Read-Host "Name des virtuellen Switch:"
-
 $VMExists = get-vm -name $VMName -ErrorAction SilentlyContinue
 If ($VMExists){
 	Write "Diese VM existiert schon"
 }
 Else {
+
+    [int]$VMDisk = Read-Host "VM Fetsplattengröße: "
+    [int]$VMMem = Read-Host "VM Ram (in GB):"
+    [int]$VMCore = Read-Host "VM Kerne:"
+    $VMGen = Read-Host "VM Generation: (1 oder 2 (UEFI): "
+    $VMSwitch = Read-Host "Name des virtuellen Switch:"
+
 	if (Test-Path "C:\VM\$VMName\Virtual Hard Disks\$VMName.vhdx" -PathType leaf)
     {
 
