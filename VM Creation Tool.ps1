@@ -188,6 +188,7 @@ do {
             $VMName = Set-VMName
         }
         2 {
+            $freeSpace = Get-FreeDiskSpace -vmDiskPath $VMPath
             [int]$VMDisktmp = Get-UserInput -Prompt "Festplattenkapazität (in GB)" -DefaultValue $template.templateDisk
             if ($VMDisktmp -le 0) {
                 $LastError = "Die Festplattenkapazität muss größer als 0 sein!"
