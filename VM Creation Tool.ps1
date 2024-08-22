@@ -34,7 +34,7 @@ $templates = @(
         templateCores = 4
         templateDisk = 50 # GB
         templateGeneration = 2
-        templateTPM = "y"
+        templateTPM = "n"
         templateSecureBoot = "n"
     }
 )
@@ -332,18 +332,18 @@ if ($VMCompleted){
 
     Set-VM -Name $VMName -AutomaticStartAction "StartIfRunning" -AutomaticStopAction "Shutdown" -ProcessorCount $VMCore
 
-    # TPM aktivieren
-    if ($VMTPM -eq "y" -and $VMGen -eq 2) {
-        Set-VMKeyProtector -VMName $VMName -NewLocalKeyProtector
-        # TPM mit der erstellten Schlüsselschutzvorrichtung aktivieren
-        Enable-VMTPM -VMName $VMName
-        Write-Host "TPM wurde aktiviert."
-    }
-
     # Secure Boot aktivieren, falls gewünscht
     if ($VMSecureBoot -eq "y" -and $VMGen -eq 2) {
         Set-VMFirmware -VMName $VMName -EnableSecureBoot On
         Write-Host "Secure Boot wurde aktiviert."
+
+        # TPM aktivieren
+        if ($VMTPM -eq "y" -and $VMGen -eq 2) {
+            Set-VMKeyProtector -VMName $VMName -NewLocalKeyProtector
+            # TPM mit der erstellten Schlüsselschutzvorrichtung aktivieren
+            Enable-VMTPM -VMName $VMName
+            Write-Host "TPM wurde aktiviert."
+        }
     }
 
     # DVD Laufwerk hinzufügen und Bootreihenfolge ändern
