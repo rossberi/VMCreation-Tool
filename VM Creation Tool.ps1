@@ -344,6 +344,9 @@ if ($VMCompleted){
             Enable-VMTPM -VMName $VMName
             Write-Host "TPM wurde aktiviert."
         }
+    }else {
+        Set-VMFirmware -VMName $VMName -EnableSecureBoot Off
+        Write-Host "Secure Boot wurde deaktiviert."
     }
 
     # DVD Laufwerk hinzufügen und Bootreihenfolge ändern
