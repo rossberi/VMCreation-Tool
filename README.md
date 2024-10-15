@@ -55,7 +55,7 @@ Set-ExecutionPolicy RemoteSigned -Scope Process -Force
 
 Wenn du direkt auf dem Hyper-V Host arbeitest, kannst du das Skript direkt aus dem Verzeichnis ausführen:
 ```powershell
-.\C:\Downloads\VM Creation Tool.ps1
+& 'C:\Downloads\VM Creation Tool.ps1'
 ```
 
 #### Remote-Verbindung zum Hyper-V Host
@@ -67,7 +67,7 @@ Enter-PSSession -ComputerName <Servername>
 
 Führe das Skript dann innerhalb der Sitzung aus:
 ```powershell
-.\C:\Downloads\VM Creation Tool.ps1
+& 'C:\Downloads\VM Creation Tool.ps1'
 ```
 
 ## Support
